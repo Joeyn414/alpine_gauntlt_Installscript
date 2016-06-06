@@ -45,13 +45,20 @@ git clone https://github.com/freddyb/Garmr.git
 #the below package seems to be required in order to build the extensions for arachni and gauntlt however it doesnt solve all the errors.
 apk add ruby-dev
 #seems to be hanging on the below command. If I run it from inside the /Garmr folder it seems to resolve it. But we should look into why this occuring.
-python /Garmr/setup.py install
+cd /Garmr/
+python setup.py install
+cd ../
+apk add make
+apk add libffi-dev
+#fix the fbuffer file so that gauntlt can install correctly. The modifying of the text in this exact line isnt idea. We may have to find something that searches for the old text at line 175 and replace it with the good text.
+cd /usr/lib/ruby/gems/2.2.0
+make -C gems/json-1.8.1/ext/json/ext/generator
+gem spec cache/json-1.8.1.gem --ruby > specifications/json-1.8.1.gemspec
+cd ~/../
+cp /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h_OLD
+awk '{ if (NR == 175) print "	 VALUE result = rb_str_new(FBUFFER_PTR(fb), FBUFFER_LEN(fb));"; else print $0}' /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h > /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h_new
 #install Arachni. Not currently working. Getting some errors with mandatory machine versions, possibly looking for something other than alpine.
-#gem install arachni -v 1.0.6
+apk add ruby-nokogiri
+gem install gauntlt --no-ri
+gem install arachni -v 1.0.6
 gem install service_manager --no-ri
-#getting a simliar error as I did with arachni. Need to investigate the use of musl.
-#gem install gauntlt
-
-
-
-
