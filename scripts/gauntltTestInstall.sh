@@ -25,7 +25,7 @@ apk add gcc musl-dev ruby-dev libffi-dev make
 gem install rdoc
 gem install json --no-ri
 apk add ruby-nokogiri
-gem install gauntlt
+gem install gauntlt --no-ri
 #...performing troubleshooting
 pip install sslyze
 ##default usage for sslyze will be 'sslyze_cli.py targeturl.com:443'
