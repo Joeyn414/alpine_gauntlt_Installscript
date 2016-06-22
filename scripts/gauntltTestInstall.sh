@@ -37,16 +37,24 @@ pip install sslyze
 #Addded *****
 #obtain sslyze repository so sslyze.py can be found
 git clone https://github.com/iSECPartners/sslyze.git sslyze
-
-#set the SSLYZE_PATH in profile 
-export SSLYZE_PATH=/sslyze/sslyze.py
-# ****
-
+#****
 
 ##default usage for sslyze will be 'sslyze_cli.py targeturl.com:443'
+
 git clone https://github.com/sqlmapproject/sqlmap.git sqlmap-dev
 python /sqlmap-dev/sqlmap.py #error bc no flags - supress
 ln -s /sqlmap-dev/sqlmap.py /usr/bin/sqlmap
+
+#Added ******* Added pathways for sslyze and sqlmap attacks
+cat << 'EOF' >> /etc/profile
+
+# configure attack pathways
+export SSLYZE_PATH=/sslyze/sslyze.py
+export SQLMAP_PATH=/sqlmap-dev/sqlmap.py
+EOF
+
+#********
+
 ##usage for sqlmap is 'python sqlmap -h' to show options.
 ##Below installs Go and the Heartbleed checker. The usage is simply 'Heartbleed targeturl.com:443'
 if ! type "Heartbleed" > /dev/null 2>&1; then
@@ -58,6 +66,7 @@ cat << 'EOF' >> $HOME_FOLDER/.profile
 # configure go pathways
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
 EOF
 	go get github.com/FiloSottile/Heartbleed
 fi
@@ -79,3 +88,6 @@ cd ../
 #install Arachni. Not currently working. Getting some errors with mandatory machine versions, possibly looking for something other than alpine.
 #gem install arachni -v 1.0.6
 gem install service_manager
+
+#Critical to open a new shell with the new environment paths binded in
+source /etc/profile
