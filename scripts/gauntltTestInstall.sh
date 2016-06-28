@@ -59,13 +59,10 @@ EOF
 ##Below installs Go and the Heartbleed checker. The usage is simply 'Heartbleed targeturl.com:443'
 if ! type "Heartbleed" > /dev/null 2>&1; then
 apk add go
-export GOPATH=$HOME_FOLDER/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-cat << 'EOF' >> $HOME_FOLDER/.profile
+cat << 'EOF' >> /etc/profile
 
 # configure go pathways
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export GO_PATH=$HOME/go
 
 EOF
 	go get github.com/FiloSottile/Heartbleed
@@ -111,4 +108,8 @@ cd ../
 gem install service_manager
 
 #Critical to open a new shell with the new environment paths binded in
+<<<<<<< HEAD
 source /etc/profile
+=======
+#source /etc/profile
+>>>>>>> 98f982265d3d2e564051ef9c77f348a590fa70d1
