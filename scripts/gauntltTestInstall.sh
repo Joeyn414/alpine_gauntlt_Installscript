@@ -73,26 +73,24 @@ fi
 ####HEARTBLEED WORKS WITH GAUNTLT AS OF 6/21/16 0851EST####
 #skipping dirb for now as it doesnt seem to add a lot of value but will revisit this if we need it.
 #install Garmr. Usage is 'garmr -u http://targeturl.com'
-git clone https://github.com/freddyb/Garmr.git
+#git clone https://github.com/freddyb/Garmr.git
+
 #or this and get rid of line change line
-# git clone https://github.com/AndrewRot/Garmr.git
+git clone https://github.com/AndrewRot/Garmr.git
 
 #get beautifulsoup4 from alpine edge test env
 apk -X http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --update add py-beautifulsoup4
-#edit line 4 to bs4
-#awk '{ if (NR == 4) print "	from bs4 import BeautifulSoup"; else print $0}' /Garmr/Garmr/scanner.py > /Garmr/Garmr/scanner.py
-
 
 #reinstall garmr
-cd /Garmr/Garmr
-sed -i -- 's/from BeautifulSoup import BeautifulSoup/from bs4 import BeautifulSoup/g' *
-cd ../
+cd /Garmr #/Garmr
+#sed -i -- 's/from BeautifulSoup import BeautifulSoup/from bs4 import BeautifulSoup/g' *
+#cd ../
 python setup.py install
 cd ../
 #***
 
 apk add ruby-irb
-
+gem install io-console
 
 #fix the fbuffer file so that gauntlt can install correctly. The modifying of the text in this exact line isnt ideal. We may have to find something that searches for the old text at line 175 and replace it with the good text.
 #cd /usr/lib/ruby/gems/2.2.0
@@ -103,12 +101,12 @@ apk add ruby-irb
 #awk '{ if (NR == 175) print "	 VALUE result = rb_str_new(FBUFFER_PTR(fb), FBUFFER_LEN(fb));"; else print $0}' /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h > /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h_new
 #install Arachni. Not currently working. Getting some errors with mandatory machine versions, possibly looking for something other than alpine.
 #gem install arachni -v 1.0.6
-#git clone -b experimental https://github.com/Arachni/arachni arachni
-#cd /arachni
-#gem install bundler # Use sudo if you get permission errors.
-#bundle install --without prof      # To resolve possible dev dependencies.
-#rake install        # To install to PATH, use sudo if you get permission errors.
-#cd ../
+git clone -b experimental https://github.com/Arachni/arachni arachni
+cd /arachni
+gem install bundler # Use sudo if you get permission errors.
+bundle install --without prof      # To resolve possible dev dependencies.
+rake install        # To install to PATH, use sudo if you get permission errors.
+cd ../
 
 gem install service_manager
 
