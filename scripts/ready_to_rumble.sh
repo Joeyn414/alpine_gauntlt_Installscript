@@ -50,7 +50,8 @@ if [ -z $HEARTBLEED ]
     echo Error verifying heartbleed in usr/bin/
 fi
 
-if [ 1 <= $ERRORS]
+
+if [ $ERRORS  != 0 ]
   then
   echo $MESSAGE
   #ERRORS=$ERRORS-1
