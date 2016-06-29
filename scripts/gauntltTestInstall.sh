@@ -43,7 +43,8 @@ git clone https://github.com/iSECPartners/sslyze.git sslyze
 
 git clone https://github.com/sqlmapproject/sqlmap.git sqlmap-dev
 #python /sqlmap-dev/sqlmap.py #error bc no flags - supress
-#ln -s /sqlmap-dev/sqlmap.py /usr/bin/sqlmap
+ln -s /sqlmap-dev/sqlmap.py /usr/bin/sqlmap
+ln -s /sslyze/sslyze.py /usr/bin/sslyze
 
 #Added ******* Added pathways for sslyze and sqlmap attacks
 cat << 'EOF' >> /etc/profile
