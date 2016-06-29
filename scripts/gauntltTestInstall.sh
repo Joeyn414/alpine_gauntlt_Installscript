@@ -4,6 +4,7 @@
 #@version: 0.1 6/28/16
 #@Contributors: Andrew Rottier, Florian Orleanu
 #@Purpose: To be run inside an alpine docker container
+#Usage: copy this script into a folder on your home directory. Then call :/# source scripts/gauntltTestInstall.sh
 
 echo script start
 if [ -z $HOME_FOLDER ]; then
@@ -21,16 +22,19 @@ apk update
 apk upgrade
 #the ruby-dev package seems to be required in order to build the extensions for arachni and gauntlt however it doesnt solve all the errors
 #removing bash from apk add, it was a dependency for ospd-w3af, testing if I can remove it
-apk add git alpine-sdk libxml2 libxml2-dev libxslt-dev curl-dev sqlite-dev yaml-dev zlib-dev python-dev py-pip curl nmap wget tar ruby ruby-bundler gcc musl-dev ruby-dev libffi-dev make ruby-nokogiri ruby-irb
+apk add git alpine-sdk libxml2 libxml2-dev libxslt-dev curl-dev sqlite-dev yaml-dev zlib-dev python-dev py-pip curl nmap wget tar ruby ruby-bundler gcc musl-dev ruby-dev libffi-dev make ruby-nokogiri ruby-irb build-base
 ##I added bash and tar so that I can run the command after ospd-w3af
 ##use this line instead of w3af-console
 apk -X http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --update add ospd-w3af
 gem install rdoc
 gem install json --no-ri
+gem install io-console
+gem install nokogiri -v 1.6.2.1 -- --use-system-libraries
 gem install gauntlt --no-ri
 pip install --upgrade pip
 
-pip install sslyze
+#install arachni
+gem install arachni -v 1.0.6
 
 #obtain sslyze repository so sslyze.py can be found
 git clone https://github.com/iSECPartners/sslyze.git sslyze
@@ -55,10 +59,13 @@ EOF
 ##Below installs Go and the Heartbleed checker. The usage is simply 'Heartbleed targeturl.com:443'
 if ! type "Heartbleed" > /dev/null 2>&1; then
 apk add go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 cat << 'EOF' >> /etc/profile
 
 # configure go pathways
 export GO_PATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 EOF
 	go get github.com/FiloSottile/Heartbleed
@@ -77,19 +84,7 @@ cd /Garmr
 python setup.py install
 cd ../
 
-gem install io-console
-#/**
-#will work on getting arachni to work but saving the below code for reference
-#install Arachni. Not currently working. Getting some errors with mandatory machine versions, possibly looking for something other than alpine.
-#gem install arachni -v 1.0.6
-#git clone -b experimental https://github.com/Arachni/arachni arachni
-#cd /arachni
-#gem install bundler # Use sudo if you get permission errors.
-#bundle install --without prof      # To resolve possible dev dependencies.
-#rake install        # To install to PATH, use sudo if you get permission errors.
-#cd ../
-#**/
-#gem install service_manager
+gem install service_manager
 
 #Critical to open a new shell with the new environment paths binded in
 source /etc/profile
