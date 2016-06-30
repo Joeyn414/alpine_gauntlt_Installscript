@@ -34,7 +34,7 @@ gem install gauntlt --no-ri
 pip install --upgrade pip
 
 #install arachni
-gem install arachni -v 1.0.6
+#gem install arachni -v 1.0.6
 
 #obtain sslyze repository so sslyze.py can be found
 git clone https://github.com/iSECPartners/sslyze.git sslyze
@@ -43,7 +43,7 @@ git clone https://github.com/iSECPartners/sslyze.git sslyze
 
 git clone https://github.com/sqlmapproject/sqlmap.git sqlmap-dev
 #python /sqlmap-dev/sqlmap.py #error bc no flags - supress
-#ln -s /sqlmap-dev/sqlmap.py /usr/bin/sqlmap
+ln -s /sqlmap-dev/sqlmap.py /usr/bin/sqlmap
 
 #Added ******* Added pathways for sslyze and sqlmap attacks
 cat << 'EOF' >> /etc/profile
