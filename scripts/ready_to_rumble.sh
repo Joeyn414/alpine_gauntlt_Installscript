@@ -3,18 +3,18 @@
 
 NMAP=`which nmap`
 GARMR=`which garmr`
-#ARACHNI=`which arachni`
+ARACHNI=`which arachni`
 HEARTBLEED=`which Heartbleed`
 SSLYZE_PATH=`which sslyze`
 SQLMAP_PATH=`which sqlmap`
 
 ERRORS=0
 
-#if [ -z $ARACHNI ]
-#  then
-#    MESSAGE="It looks like you dont have arachni-web-scanner installed.  You should be able to do 'gem install arachni' to install it.  You might need to install libcurl first, on ubuntu you can run 'sudo apt-get install libcurl4-openssl-dev && gem install arachni' For more info on arachni, go to arachni-scanner.com"
-#    ERRORS=$ERRORS+1
-#fi
+if [ -z $ARACHNI ]
+  then
+    MESSAGE="It looks like you dont have arachni-web-scanner installed.  You should be able to do 'gem install arachni' to install it.  You might need to install libcurl first, on ubuntu you can run 'sudo apt-get install libcurl4-openssl-dev && gem install arachni' For more info on arachni, go to arachni-scanner.com"
+    ERRORS=$ERRORS+1
+fi
 
 if [ -z $SSLYZE_PATH ]
   then
