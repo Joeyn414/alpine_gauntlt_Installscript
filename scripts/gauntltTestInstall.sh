@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 #@author: Joe Niquette
-#@version: 0.1 6/28/16
+#@version: 1.0 6/30/16
 #@Contributors: Andrew Rottier, Florian Orleanu
 #@Purpose: To be run inside an alpine docker container
 #Usage: copy this script into a folder on your home directory. Then call :/# source scripts/gauntltTestInstall.sh
