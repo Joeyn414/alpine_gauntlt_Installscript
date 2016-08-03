@@ -49,6 +49,7 @@ pip install --upgrade pip
 wget https://github.com/nabla-c0d3/sslyze/archive/0.13.6.tar.gz
 tar xvzf 0.13.6.tar.gz
 ln -s /sslyze-0.13.6/sslyze_cli.py /usr/bin/sslyze
+pip install nassl
 ##default usage for sslyze will be 'sslyze_cli.py targeturl.com:443'
 
 git clone https://github.com/sqlmapproject/sqlmap.git sqlmap-dev
