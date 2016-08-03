@@ -44,8 +44,11 @@ gem install gauntlt --no-ri
 pip install --upgrade pip
 
 #obtain sslyze repository so sslyze.py can be found
-git clone https://github.com/iSECPartners/sslyze.git sslyze
-ln -s /sslyze/sslyze.py /usr/bin/sslyze
+#git clone https://github.com/iSECPartners/sslyze.git sslyze
+#ln -s /sslyze/sslyze.py /usr/bin/sslyze
+wget https://github.com/nabla-c0d3/sslyze/archive/0.13.6.tar.gz
+tar xvzf 0.13.6.tar.gz
+ln -s /sslyze-0.13.6/sslyze_cli.py /usr/bin/sslyze
 ##default usage for sslyze will be 'sslyze_cli.py targeturl.com:443'
 
 git clone https://github.com/sqlmapproject/sqlmap.git sqlmap-dev
@@ -56,7 +59,7 @@ ln -s /sqlmap-dev/sqlmap.py /usr/bin/sqlmap
 cat << 'EOF' >> /etc/profile
 
 # configure attack pathways
-export SSLYZE_PATH=/sslyze/sslyze.py
+export SSLYZE_PATH=/sslyze-0.13.6/sslyze_cli.py
 export SQLMAP_PATH=/sqlmap-dev/sqlmap.py
 EOF
 
