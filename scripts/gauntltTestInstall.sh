@@ -28,9 +28,9 @@ apk add git ruby alpine-sdk libxml2 libxml2-dev libxslt-dev curl-dev sqlite-dev 
 apk -X http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --update add ospd-w3af
 gem install rdoc
 gem install json --no-ri
-gem install io-console
-gem install nokogiri -v 1.6.2.1 -- --use-system-libraries
-gem install json -v 1.8.1
+gem install io-console --no-ri
+gem install nokogiri -v 1.6.2.1 -- --use-system-libraries --no-ri
+gem install json -v 1.8.1 --no-ri
 #this script is to change the fbuffer file in the 1.8.1 json file. This is a dependency
 #for arachni
 awk '{ if (NR ==175) print " VALUE result = rb_str_new(FBUFFER_PTR(fb), FBUFFER_LEN(fb));"; else print $0}' /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h > /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h_OLD
@@ -38,7 +38,7 @@ mv /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h_OLD /
 make -C /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/generator
 gem spec /usr/lib/ruby/gems/2.2.0/cache/json-1.8.1.gem --ruby > usr/lib/ruby/gems/2.2.0/specifications/json-1.8.1.gemspec
 #install arachni
-gem install arachni -v 1.0.6
+gem install arachni -v 1.0.6 --no-ri
 
 gem install gauntlt --no-ri
 pip install --upgrade pip
