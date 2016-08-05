@@ -64,21 +64,6 @@ export SSLYZE_PATH=/sslyze-0.13.6/sslyze_cli.py
 export SQLMAP_PATH=/sqlmap-dev/sqlmap.py
 EOF
 
-##Below installs Go and the Heartbleed checker. The usage is simply 'Heartbleed targeturl.com:443'
-if ! type "Heartbleed" > /dev/null 2>&1; then
-apk add go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-cat << 'EOF' >> /etc/profile
-
-# configure go pathways
-export GO_PATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
-EOF
-	go get github.com/FiloSottile/Heartbleed
-fi
-
 #skipping dirb for now as it doesnt seem to add a lot of value but will revisit this if we need it.
 #install Garmr. Usage is 'garmr -u http://targeturl.com'
 #git clone https://github.com/freddyb/Garmr.git
