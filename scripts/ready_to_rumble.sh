@@ -4,7 +4,6 @@
 NMAP=`which nmap`
 GARMR=`which garmr`
 ARACHNI=`which arachni`
-HEARTBLEED=`which Heartbleed`
 SSLYZE_PATH=`which sslyze`
 SQLMAP_PATH=`which sqlmap`
 
@@ -43,13 +42,6 @@ if [ -z $NMAP ]
     ERRORS=$ERRORS+1
     echo Error verifying nmap in usr/bin/
 fi
-if [ -z $HEARTBLEED ]
-  then
-    MESSAGE="Heartbleed is not installed in your path, try installing it (https://github.com/FiloSottile/Heartbleed) and adding it to your path"
-    ERRORS=$ERRORS+1
-    echo Error verifying heartbleed in usr/bin/
-fi
-
 
 if [ $ERRORS  != 0 ]
   then
