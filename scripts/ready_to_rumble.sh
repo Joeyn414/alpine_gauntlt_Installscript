@@ -48,6 +48,7 @@ if [ $ERRORS  != 0 ]
   echo $MESSAGE
   #ERRORS=$ERRORS-1
   echo "$ERRORS more things to fix... keep running ./ready_to_rumble.sh until you ARE."
+  exit 3
 else
   echo "You ARE ready to rumble!"
 fi
