@@ -4,6 +4,17 @@ apk update
 apk upgrade
 apk add git
 
+mkdir -p /opt/security/
+
+if [ -z $START_FOLDER ]; then
+        START_FOLDER='/opt/security/'
+        echo -e "INFO: setting \$START_FOLDER to '/opt/security/'";
+fi
+
+cd $START_FOLDER
+
+git clone https://github.com/Joeyn414/alpine_gauntlt_Installscript.git
+
 #install gauntlt to the alpine container
 ./opt/security/alpine_gauntlt_Installscript/scripts/gauntltTestInstall.sh
 

@@ -11,12 +11,8 @@ echo script start
 mkdir -p /opt/security/
 
 if [ -z $START_FOLDER ]; then
-	START_FOLDER='\opt\security\'
-	echo -e "INFO: setting \$START_FOLDER to '\opt\security\'";
-fi
-if [ -z $USER_NAME ]; then
-	USER_NAME='whoami'
-	echo -e "INFO: setting \$USER_NAME to 'whoami'";
+	START_FOLDER='/opt/security/'
+	echo -e "INFO: setting \$START_FOLDER to '/opt/security/'";
 fi
 
 ####install system deps####
