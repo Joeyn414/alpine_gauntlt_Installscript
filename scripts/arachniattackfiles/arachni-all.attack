@@ -4,7 +4,7 @@ Feature: Look for cross site scripting (xss) using arachni against a URL
 Scenario: Using the arachni, look for cross site scripting and verify no issues are found
   Given "arachni" is installed
   And the following profile:
-     | name                | value                          |
-     | url                 | http://scanme.nmap.org         |
+     | name                | value     |
+     | url                 | 127.0.0.2 |
   When I launch an "arachni-allmediumandhigher" attack
   Then the output should contain "0 issues were detected."

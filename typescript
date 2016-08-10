@@ -1,0 +1,173 @@
+Script started on Wed 22 Jun 2016 15:46:52 EDT
+bash: /etc/profile.d/rvm.sh: No such file or directory
+bash: /etc/profile.d/rvm.sh: No such file or directory
+]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscriptroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript# cd scripts/
+]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# ls
+[0m[01;32mgauntltTestInstall.sh[0m
+]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# vi gauntltTestInstall.sh 
+[?1049h[?1h=[2;1H▽[6n[2;1H  [1;1H]11;?[1;34r[?12;25h[?12l[?25h[27m[23m[m[H[2J[?25l[34;1H"gauntltTestInstall.sh" [noeol] 93L, 3945C[>c[27m[23m[m[H[2J[1;1H[96m#!/bin/sh[m
+[93mecho[m[95m script start[m
+[93mif [[m [93m-z[m [38;5;81m$HOME_FOLDER[m [93m];[m [93mthen[m[4;9H[1m[96mHOME_FOLDER[m=[38;5;81m$HOME[m[5;9H[93mecho[m[95m -e [m[93m"[m[95mINFO: setting [m[38;5;224m\$[m[95mHOME_FOLDER to [m[38;5;81m$HOME[m[93m";
+fi
+if [[m [93m-z[m [38;5;81m$USER_NAME[m [93m];[m [93mthen[m[8;9H[1m[96mUSER_NAME[m=[93m'[m[95mwhoami[m[93m'[9;9Hecho[m[95m -e [m[93m"[m[95mINFO: setting [m[38;5;224m\$[m[95mUSER_NAME to 'whoami'[m[93m";
+fi[m
+
+[96m##install system deps
+##useing curl-dev instead of libcurl4-openssl-dev, which includes openssl-dev and curl-dev. using sqll[14;1Hit-dev instead of libsqlite3-dev. using yaml-dev instead of libaml-dev. using zlib-dev instead of zlii[15;1Hb1g-dev. using py-pip instead of python-pip, this include py-setuptools so you dont need python-setupp[16;1Htools.[m
+apk update
+apk upgrade
+apk add alpine-sdk
+apk add git libxml[95m2[m libxml2-dev libxslt-dev curl-dev sqlite-dev yaml-dev zlib-dev python-dev py-pip cc[21;1Hurl nmap wget bash tar
+[96m##I added bash and tar so that I can run the command after ospd-w3af
+##use this line instead of w3af-console[m
+apk [38;5;224m-X[m http://dl-cdn.alpinelinux.org/alpine/edge/testing/ [38;5;224m--update[m add ospd-w3af
+apk add ruby
+apk add ruby-bundler
+[96m#the ruby-dev package seems to be required in order to build the extensions for arachni and gauntlt hh[28;1However it doesnt solve all the errors[m
+apk add gcc musl-dev ruby-dev libffi-dev make
+gem install rdoc
+gem install json [38;5;224m--no-ri[m
+apk add ruby-nokogiri
+gem install gauntlt [38;5;224m--no-ri[m[34;84H1,1[11CTop"gauntltTestInstall.sh" [noeol] 93L, 3945C[41C   [11C   [1;1HP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?12l[?25h[?25l[34;84H2,1[11CTop[2;1H[?12l[?25h[?25l[34;84H3[3;1H[?12l[?25h[?25l[34;84H4,1-8[4;8H[?12l[?25h[?25l[34;84H5[5;8H[?12l[?25h[?25l[34;84H6,1  [6;1H[?12l[?25h[?25l[34;84H7[7;1H[?12l[?25h[?25l[34;84H8,1-8[8;8H[?12l[?25h[?25l[34;84H9[9;8H[?12l[?25h[?25l[34;84H10,1 [10;1H[?12l[?25h[?25l[34;85H1,0-1[11;1H[?12l[?25h[?25l[34;85H2,1  [12;1H[?12l[?25h[?25l[34;85H3[13;1H[?12l[?25h[?25l[34;85H4[17;1H[?12l[?25h[?25l[34;85H5[18;1H[?12l[?25h[?25l[34;85H6[19;1H[?12l[?25h[?25l[34;85H7[20;1H[?12l[?25h[?25l[34;85H8[22;1H[?12l[?25h[?25l[34;85H9[23;1H[?12l[?25h[?25l[34;84H20[24;1H[?12l[?25h[?25l[34;85H1[25;1H[?12l[?25h[?25l[34;85H2[26;1H[?12l[?25h[?25l[34;85H3[27;1H[?12l[?25h[?25l[34;85H4[29;1H[?12l[?25h[?25l[34;85H5[30;1H[?12l[?25h[?25l[34;85H6[31;1H[?12l[?25h[?25l[34;85H7[32;1H[?12l[?25h[?25l[34;85H8[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m#...performing troubleshooting[m[34;1H[K[34;84H29,1[11C1%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[34;84H[K[34;84H30,0-1[9C3%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m#Added **** upgrade pip installer[m[34;84H[K[34;84H31,1[11C4%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1Hpip install [38;5;224m--upgrade[m pip[34;84H[K[34;84H32,1[11C6%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m#****[m[34;84H[K[34;84H33,1[11C7%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[34;84H[K[34;84H34,0-1[9C9%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1Hpip install sslyze[34;84H[K[34;84H35,1[10C10%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[34;84H[K[34;84H36,0-1[8C12%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m#Addded *****[m[34;84H[K[34;84H37,1[10C13%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m#obtain sslyze repository so sslyze.py can be found[m[34;84H[K[34;84H38,1[10C15%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1Hgit clone https://github.com/iSECPartners/sslyze.git sslyze[34;84H[K[34;84H39,1[10C16%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m#****[m[34;84H[K[34;84H40,1[10C18%[33;1H[?12l[?25h[?25l[1;33r[1;1H[4M[1;34r[31;1H[96m##default usage for sslyze will be 'sslyze_cli.py targeturl.com:443'[m
+
+git clone https://github.com/sqlmapproject/sqlmap.git sqlmap-dev[34;84H[K[34;84H41,0-1[8C20%[30;1H[?12l[?25h[?25l[34;85H2,1  [31;1H[?12l[?25h[?25l[34;85H3,0-1[32;1H[?12l[?25h[?25l[34;85H4,1  [33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1Hpython /sqlmap-dev/sqlmap.py [96m#error bc no flags - supress[m[34;84H[K[34;84H45,1[10C22%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1Hln [38;5;224m-s[m /sqlmap-dev/sqlmap.py /usr/bin/sqlmap[34;84H[K[34;84H46,1[10C24%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[34;84H[K[34;84H47,0-1[8C25%[33;1H[?12l[?25h[?25l[1;33r[1;1H[2M[1;34r[32;1H[96m#Added ******* Added pathways for sslyze and sqlmap attacks[m
+[93mcat[m [93m<< 'EOF'[m[95m >> /etc/profile[m[34;84H[K[34;84H48,1[10C27%[32;1H[?12l[?25h[?25l[34;85H9[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[34;84H[K[34;84H50,0-1[8C29%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[95m# configure attack pathways[m[34;84H[K[34;84H51,1[10C31%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[95mexport SSLYZE_PATH=/sslyze/sslyze.py[m[34;84H[K[34;84H52,1[10C32%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[95mexport SQLMAP_PATH=/sqlmap-dev/sqlmap.py[m[34;84H[K[34;84H53,1[10C34%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[93mEOF[m[34;84H[K[34;84H54,1[10C36%[33;1H[?12l[?25h[?25l[1;33r[1;1H[2M[1;34r[33;1H[96m#********[m[34;84H[K[34;84H55,0-1[8C38%[32;1H[?12l[?25h[?25l[34;85H6,1  [33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[34;84H[K[34;84H57,0-1[8C40%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m##usage for sqlmap is 'python sqlmap -h' to show options.[m[34;84H[K[34;84H58,1[10C41%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m##Below installs Go and the Heartbleed checker. The usage is simply 'Heartbleed targeturl.com:443'[m[34;84H[K[34;84H59,1[10C43%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[93mif ![m [93mtype[m [93m"[m[95mHeartbleed[m[93m"[m [93m>[m /dev/null [95m2[m[93m>&[m[95m1[m[93m;[m [93mthen[m[34;84H[K[34;84H60,1[10C45%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1Hapk add go[34;84H[K[34;84H61,1[10C46%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[93mexport[m[1m[96m GOPATH=[m[38;5;81m$HOME_FOLDER[m[1m[96m/go[m[34;84H[K[34;84H62,1[10C48%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[93mexport[m[1m[96m PATH=[m[38;5;81m$PATH[m[1m[96m:[m[38;5;81m$GOROOT[m[1m[96m/bin:[m[38;5;81m$GOPATH[m[1m[96m/bin[m[34;84H[K[34;84H63,1[10C50%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[93mcat[m [93m<< 'EOF'[m[95m >> $HOME_FOLDER/.profile[m[34;84H[K[34;84H64,1[10C51%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[34;84H[K[34;84H65,0-1[8C53%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[95m# configure go pathways[m[34;84H[K[34;84H66,1[10C55%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[95mexport GOPATH=$HOME/go[m[34;84H[K[34;84H67,1[10C56%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[95mexport PATH=$PATH:$GOROOT/bin:$GOPATH/bin[m[34;84H[K[34;84H68,1[10C58%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[34;84H[K[34;84H69,0-1[8C60%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[93mEOF[m[34;84H[K[34;84H70,1[10C61%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;9Hgo get github.com/FiloSottile/Heartbleed[34;84H[K[34;84H71,1-8[8C63%[33;8H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[93mfi[m[34;84H[K[34;84H72,1[10C65%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m####HEARTBLEED WORKS WITH GAUNTLT AS OF 6/21/16 0851EST####[m[34;84H[K[34;84H73,1[10C66%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m#skipping dirb for now as it doesnt seem to add a lot of value but will revisit this if we need it.[m[34;84H[K[34;84H74,1[10C68%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m#install Garmr. Usage is 'garmr -u http://targeturl.com'[m[34;84H[K[34;84H75,1[10C70%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1Hgit clone https://github.com/freddyb/Garmr.git[34;84H[K[34;84H76,1[10C71%[33;1H[?12l[?25h[?25l[1;33r[1;1H[2M[1;34r[32;1H[96m#seems to be hanging on the below command. If I run it from inside the /Garmr folder it seems to resoo[33;1Hlve it. But we should look into why this occuring.[m[34;84H[K[34;84H77,1[10C73%[32;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[93mcd[m /Garmr/[34;84H[K[34;84H78,1[10C75%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1Hpython setup.py install[34;84H[K[34;84H79,1[10C77%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[93mcd[m ../[34;84H[K[34;84H80,1[10C78%[33;1H[?12l[?25h[?25l[1;33r[1;1H[3M[1;34r[31;1H[96m#fix the fbuffer file so that gauntlt can install correctly. The modifying of the text in this exact  [32;1Hline isnt ideal. We may have to find something that searches for the old text at line 175 and replacee[33;1H it with the good text.[m[34;84H[K[34;84H81,1[10C80%[31;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m#cd /usr/lib/ruby/gems/2.2.0[m[34;84H[K[34;84H82,1[10C82%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m#make -C gems/json-1.8.1/ext/json/ext/generator[m[34;84H[K[34;84H83,1[10C84%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m#gem spec cache/json-1.8.1.gem --ruby > specifications/json-1.8.1.gemspec[m[34;84H[K[34;84H84,1[10C85%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m#cd ~/../[m[34;84H[K[34;84H85,1[10C87%[33;1H[?12l[?25h[?25l[1;33r[1;1H[2M[1;34r[32;1H[96m#cp /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h /usr/lib/ruby/gems/2.2.0//[33;1Hgems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h_OLD[m[34;84H[K[34;84H86,1[10C89%[32;1H[?12l[?25h[?25l[1;33r[1;1H[3M[1;34r[31;1H[96m#awk '{ if (NR == 175) print "   VALUE result = rb_str_new(FBUFFER_PTR(fb), FBUFFER_LEN(fb));"; else  [32;1Hprint $0}' /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h > /usr/lib/ruby/gee[33;1Hms/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h_new[m[34;84H[K[34;84H87,1[10C90%[31;1H[?12l[?25h[?25l[1;33r[1;1H[2M[1;34r[32;1H[96m#install Arachni. Not currently working. Getting some errors with mandatory machine versions, possibll[33;1Hy looking for something other than alpine.[m[34;84H[K[34;84H88,1[10C92%[32;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m#gem install arachni -v 1.0.6[m[34;84H[K[34;84H89,1[10C94%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1Hgem install service_manager[34;84H[K[34;84H90,1[10C95%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[34;84H[K[34;84H91,0-1[8C97%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1H[96m#Critical to open a new shell with the new environment paths binded in[m[34;84H[K[34;84H92,1[10C98%[33;1H[?12l[?25h[?25l[1;33r[33;1H
+[1;34r[33;1Hsource /etc/profile[34;84H[K[34;84H93,1[10CBot[33;1H[?12l[?25h[?25l[34;85H2[32;1H[?12l[?25h[?25l[34;85H1,0-1[31;1H[?12l[?25h[?25l[34;85H0,1  [30;1H[?12l[?25h[?25l[34;84H89[29;1H[?12l[?25h[?25l[34;85H8[27;1H[?12l[?25h[?25l[34;85H7[24;1H[?12l[?25h[?25l[34;85H6[22;1H[?12l[?25h[?25l[34;85H5[21;1H[?12l[?25h[?25l[34;85H4[20;1H[?12l[?25h[?25l[34;85H3[19;1H[?12l[?25h[?25l[34;85H2[18;1H[?12l[?25h[?25l[34;85H1[15;1H[?12l[?25h[?25l[34;85H0[14;1H[?12l[?25h[?25l[34;84H79[13;1H[?12l[?25h[?25l[34;85H8[12;1H[?12l[?25h[?25l[34;85H7[10;1H[?12l[?25h[?25l[34;85H6[9;1H[?12l[?25h[?25l[34;85H5[8;1H[?12l[?25h[?25l[34;85H4[7;1H[?12l[?25h[?25l[34;85H3[6;1H[?12l[?25h[?25l[34;85H2[5;1H[?12l[?25h[?25l[34;85H1,1-8[4;8H[?12l[?25h[?25l[34;85H0,1  [3;1H[?12l[?25h[?25l[34;84H69,0-1[2;1H[?12l[?25h[?25l[34;85H8,1  [1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[95mexport GOPATH=$HOME/go[m[34;84H[K[34;84H67,1[10C98%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[95m# configure go pathways[m[34;84H[K[34;84H66,1[10C97%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[34;84H[K[34;84H65,0-1[8C95%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[93mcat[m [93m<< 'EOF'[m[95m >> $HOME_FOLDER/.profile[m[34;84H[K[34;84H64,1[10C94%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[93mexport[m[1m[96m PATH=[m[38;5;81m$PATH[m[1m[96m:[m[38;5;81m$GOROOT[m[1m[96m/bin:[m[38;5;81m$GOPATH[m[1m[96m/bin[m[34;84H[K[34;84H63,1[10C92%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[93mexport[m[1m[96m GOPATH=[m[38;5;81m$HOME_FOLDER[m[1m[96m/go[m[33;1H[94m@                                                                                                    [m[34;84H[K[34;84H62,1[10C91%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1Hapk add go[34;84H[K[34;84H61,1[10C90%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[93mif ![m [93mtype[m [93m"[m[95mHeartbleed[m[93m"[m [93m>[m /dev/null [95m2[m[93m>&[m[95m1[m[93m;[m [93mthen[m[32;1H[94m@                                                                                                    [33;1H@                                                                                                    [m[34;84H[K[34;84H60,1[10C89%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[96m##Below installs Go and the Heartbleed checker. The usage is simply 'Heartbleed targeturl.com:443'[m[34;84H[K[34;84H59,1[10C89%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[96m##usage for sqlmap is 'python sqlmap -h' to show options.[m[34;84H[K[34;84H58,1[10C89%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[33;1H[94m@                                                                                                    [m[34;84H[K[34;84H57,0-1[8C87%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[96m#********[m[34;84H[K[34;84H56,1[10C87%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[34;84H[K[34;84H55,0-1[8C85%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[93mEOF[m[34;84H[K[34;84H54,1[10C84%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[95mexport SQLMAP_PATH=/sqlmap-dev/sqlmap.py[m[34;84H[K[34;84H53,1[10C82%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[95mexport SSLYZE_PATH=/sslyze/sslyze.py[m[34;84H[K[34;84H52,1[10C80%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[95m# configure attack pathways[m[32;1H[94m@                                                                                                    [33;1H@                                                                                                    [m[34;84H[K[34;84H51,1[10C79%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[34;84H[K[34;84H50,0-1[8C79%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[93mcat[m [93m<< 'EOF'[m[95m >> /etc/profile[m[34;84H[K[34;84H49,1[10C78%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[96m#Added ******* Added pathways for sslyze and sqlmap attacks[m[34;84H[K[34;84H48,1[10C77%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[34;84H[K[34;84H47,0-1[8C75%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1Hln [38;5;224m-s[m /sqlmap-dev/sqlmap.py /usr/bin/sqlmap[34;84H[K[34;84H46,1[10C73%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1Hpython /sqlmap-dev/sqlmap.py [96m#error bc no flags - supress[m[33;1H[94m@                                                                                                    [m[34;84H[K[34;84H45,1[10C72%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1Hgit clone https://github.com/sqlmapproject/sqlmap.git sqlmap-dev[34;84H[K[34;84H44,1[10C71%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[34;84H[K[34;84H43,0-1[8C70%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[96m##default usage for sslyze will be 'sslyze_cli.py targeturl.com:443'[m[34;84H[K[34;84H42,1[10C68%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[34;84H[K[34;84H41,0-1[8C66%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[96m#****[m[34;84H[K[34;84H40,1[10C65%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1Hgit clone https://github.com/iSECPartners/sslyze.git sslyze[34;84H[K[34;84H39,1[10C63%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[96m#obtain sslyze repository so sslyze.py can be found[m[34;84H[K[34;84H38,1[10C61%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[1;1H[96m#Addded *****[m[34;84H[K[34;84H37,1[10C60%[1;1H[?12l[?25h[?25l[1;33r[1;1H[L[1;34r[34;84H[K[34;84H36,0-1[8C58%[1;1H[?12l[?25h[?25l[34;84H[K[34;1H:[?12l[?25hq[?25l[?12l[?25h[?25l[34;1H[K[34;1H[?1l>[?12l[?25h[?1049l]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# vi gauntltTestInstall.sh ls[Kcd scripts/[7Pexitgit pullls[Kcd scripts/ls[Kcd alpine_gauntlt_Installscript//[A]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# ls[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cgit updateclone https://github.com/Joeeyn414/alpine_gauntlt_Installscript.git[K[A]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# ls[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd ../[4Plscd ../[4Plsgit pull https://github.com/AndrrewRot/alpine_gauntlt_Installscript.git master[A]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# ls[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd scripts/ls[Kgit merge --no-ff AndrewRot-mastter[A]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# [C[C[C[C[12Pcheckout master
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cpull https://github.com/AndrrewRot/alpine_gauntlt_Installscript.git master[A]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# [C[C[C[C[C[C[C[C[Cgit://github.com/Andrew[2P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[A]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# [C[C[C[Ccheckout -b AndrewRot-master master[K[A]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# cd alpine_gauntlt_Installscript/[K[A]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# [C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2Plscd ../[4Plscd ../git pull git://github.com/AndrewwRot/alpine_gauntlt_Installscript.git master[A]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# [C[C[C[Ccheckout -b AndrewRot-master master[K[A]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# ls[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cgit pushcommitadd gauntltTestInstall.sh [5Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cgit push[Kcommitadd gauntltTestInstall.sh commit[K[2Ppushcommitls[Kcd scripts/alpine_gauntlt_Installscript//[A]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# ls[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdocker cp alpine_gauntlt_Installlscript/scripts/gauntltTestInstall.sh securitytest:gauntltTestInstall.sh [Als[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdocker cp alpine_gauntlt_Installlscript/scripts/gauntltTestInstall.sh securitytest:gauntltTestInstall.sh [Als[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd Desktop/ls[Kcd ../docker cp examples/ securitytestt:examples/[A]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# ls[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdocker ps[K[K[K[K[K[K[K[K[Kdocker ps
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                           NAMES
+126e29a562f5        nginx:1.10.0-alpine   "nginx -g 'daemon off"   31 hours ago        Up 31 hours         443/tcp, 0.0.0.0:8080->80/tcp   securitytest
+]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# docker
+Usage: docker [OPTIONS] COMMAND [arg...]
+       docker daemon [ --help | ... ]
+       docker [ --help | -v | --version ]
+
+A self-sufficient runtime for containers.
+
+Options:
+
+  --config=~/.docker              Location of client config files
+  -D, --debug                     Enable debug mode
+  -H, --host=[]                   Daemon socket(s) to connect to
+  -h, --help                      Print usage
+  -l, --log-level=info            Set the logging level
+  --tls                           Use TLS; implied by --tlsverify
+  --tlscacert=~/.docker/ca.pem    Trust certs signed only by this CA
+  --tlscert=~/.docker/cert.pem    Path to TLS certificate file
+  --tlskey=~/.docker/key.pem      Path to TLS key file
+  --tlsverify                     Use TLS and verify the remote
+  -v, --version                   Print version information and quit
+
+Commands:
+    attach    Attach to a running container
+    build     Build an image from a Dockerfile
+    commit    Create a new image from a container's changes
+    cp        Copy files/folders between a container and the local filesystem
+    create    Create a new container
+    diff      Inspect changes on a container's filesystem
+    events    Get real time events from the server
+    exec      Run a command in a running container
+    export    Export a container's filesystem as a tar archive
+    history   Show the history of an image
+    images    List images
+    import    Import the contents from a tarball to create a filesystem image
+    info      Display system-wide information
+    inspect   Return low-level information on a container or image
+    kill      Kill a running container
+    load      Load an image from a tar archive or STDIN
+    login     Register or log in to a Docker registry
+    logout    Log out from a Docker registry
+    logs      Fetch the logs of a container
+    network   Manage Docker networks
+    pause     Pause all processes within a container
+    port      List port mappings or a specific mapping for the CONTAINER
+    ps        List containers
+    pull      Pull an image or a repository from a registry
+    push      Push an image or a repository to a registry
+    rename    Rename a container
+    restart   Restart a container
+    rm        Remove one or more containers
+    rmi       Remove one or more images
+    run       Run a command in a new container
+    save      Save an image(s) to a tar archive
+    search    Search the Docker Hub for images
+    start     Start one or more stopped containers
+    stats     Display a live stream of container(s) resource usage statistics
+    stop      Stop a running container
+    tag       Tag an image into a repository
+    top       Display the running processes of a container
+    unpause   Unpause all processes within a container
+    update    Update resources of one or more containers
+    version   Show the Docker version information
+    volume    Manage Docker volumes
+    wait      Block until a container stops, then print its exit code
+
+Run 'docker COMMAND --help' for more information on a command.
+]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# docker kill securitytest
+securitytest
+]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+]0;root@osboxes: /home/JoeN/Desktop/alpine_gauntlt_Installscript/scriptsroot@osboxes:/home/JoeN/Desktop/alpine_gauntlt_Installscript/scripts# nan[K[K[Kgrep [K[K[K[K[K7[Khistr[Kory | grep nginx
+  232  docker get [01;31m[Knginx[m[K/alpine
+  234  docker pull [01;31m[Knginx[m[K/apline
+  282  docker run --rm -it -p 8080:80 --name securitytest -v 'pwd:/usr/share/[01;31m[Knginx[m[K/html [01;31m[Knginx[m[K:1.10.0-alpine
+  283  docker run --rm -it -p 8080:80 --name securitytest -v 'pwd':/usr/

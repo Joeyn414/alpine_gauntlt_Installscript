@@ -1,15 +1,18 @@
 #!/bin/sh
 #
 #@author: Joe Niquette
-#@version: 1.0 6/30/16
+#@version: 1.1 6/30/16
 #@Contributors: Andrew Rottier, Florian Orleanu
 #@Purpose: To be run inside an alpine docker container
-#Usage: copy this script into a folder on your home directory. Then call :/# source scripts/gauntltTestInstall.sh
+#Usage: copy this script into a folder on your home directory, cd into the scripts folder and run ./gauntltTestInstall.sh
 
 echo script start
-if [ -z $HOME_FOLDER ]; then
-	HOME_FOLDER=$HOME
-	echo -e "INFO: setting \$HOME_FOLDER to $HOME";
+
+mkdir -p /opt/security/
+
+if [ -z $START_FOLDER ]; then
+	START_FOLDER='\opt\security\'
+	echo -e "INFO: setting \$START_FOLDER to '\opt\security\'";
 fi
 if [ -z $USER_NAME ]; then
 	USER_NAME='whoami'
@@ -36,7 +39,7 @@ gem install json -v 1.8.1 --no-ri
 awk '{ if (NR ==175) print " VALUE result = rb_str_new(FBUFFER_PTR(fb), FBUFFER_LEN(fb));"; else print $0}' /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h > /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h_OLD
 mv /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h_OLD /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/fbuffer/fbuffer.h
 make -C /usr/lib/ruby/gems/2.2.0/gems/json-1.8.1/ext/json/ext/generator
-gem spec /usr/lib/ruby/gems/2.2.0/cache/json-1.8.1.gem --ruby > usr/lib/ruby/gems/2.2.0/specifications/json-1.8.1.gemspec
+gem spec /usr/lib/ruby/gems/2.2.0/cache/json-1.8.1.gem --ruby > /usr/lib/ruby/gems/2.2.0/specifications/json-1.8.1.gemspec
 #install arachni
 gem install arachni -v 1.0.6 --no-ri
 
@@ -46,34 +49,38 @@ pip install --upgrade pip
 #obtain sslyze repository so sslyze.py can be found
 #git clone https://github.com/iSECPartners/sslyze.git sslyze
 #ln -s /sslyze/sslyze.py /usr/bin/sslyze
+#need to ensure the wget below is executed in \opt\security
+cd $START_FOLDER
 wget https://github.com/nabla-c0d3/sslyze/archive/0.13.6.tar.gz
 tar xvzf 0.13.6.tar.gz
-ln -s /sslyze-0.13.6/sslyze_cli.py /usr/bin/sslyze
+ln -s /opt/security/sslyze-0.13.6/sslyze_cli.py /usr/bin/sslyze
 pip install nassl
 ##default usage for sslyze will be 'sslyze_cli.py targeturl.com:443'
 
+cd $START_FOLDER
 git clone https://github.com/sqlmapproject/sqlmap.git sqlmap-dev
 #python /sqlmap-dev/sqlmap.py #error bc no flags - supress
-ln -s /sqlmap-dev/sqlmap.py /usr/bin/sqlmap
+ln -s /opt/security/sqlmap-dev/sqlmap.py /usr/bin/sqlmap
 
 #paths for sslyze and sqlmap
 cat << 'EOF' >> /etc/profile
 
 # configure attack pathways
-export SSLYZE_PATH=/sslyze-0.13.6/sslyze_cli.py
-export SQLMAP_PATH=/sqlmap-dev/sqlmap.py
+export SSLYZE_PATH=/opt/security/sslyze-0.13.6/sslyze_cli.py
+export SQLMAP_PATH=/opt/security/sqlmap-dev/sqlmap.py
 EOF
 
 #skipping dirb for now as it doesnt seem to add a lot of value but will revisit this if we need it.
 #install Garmr. Usage is 'garmr -u http://targeturl.com'
 #git clone https://github.com/freddyb/Garmr.git
 #or this and get rid of line change line
+cd $START_FOLDER
 git clone https://github.com/AndrewRot/Garmr.git
 
 #get beautifulsoup4 from alpine edge test env
 apk -X http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --update add py-beautifulsoup4
 
-cd /Garmr
+cd Garmr/
 python setup.py install
 cd ../
 
